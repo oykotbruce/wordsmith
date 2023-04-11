@@ -21,6 +21,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
           #target: 'https://www.zaproxy.org/'
-          target: '10.101.228.236:8080'
+          target: 'http://192.168.49.2:30961'
           #rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
