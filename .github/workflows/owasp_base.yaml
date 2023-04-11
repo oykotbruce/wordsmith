@@ -11,6 +11,10 @@ jobs:
     name : base_scan
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
       - name: scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
