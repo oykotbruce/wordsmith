@@ -10,6 +10,9 @@ jobs:
   zap_base_scan:
     name : web application base_scan
     runs-on: ubuntu-latest
+    permissions: 
+      issues: write
+      security-events: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
