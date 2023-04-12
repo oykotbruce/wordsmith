@@ -8,15 +8,15 @@ on:
   workflow_dispatch:
 jobs:
   zap_base_scan:
-    name : base_scan
-    runs-on: ubuntu-20.04
+    name : web application base_scan
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: scan
-        uses: zaproxy/action-baseline@v0.4.0
+        uses: zaproxy/action-baseline@v0.7.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.example.com/' # target: 'https://localhost:8080'
+          target: 'http://192.168.49.2:30961' # target: 'https://localhost:8080'
           cmd_options: '-a'
