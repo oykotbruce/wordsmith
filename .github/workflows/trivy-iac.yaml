@@ -8,6 +8,9 @@ jobs:
   build:
     name: trivy to scan iac 
     runs-on: ubuntu-20.04
+    permissions:
+      issues: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
