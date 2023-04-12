@@ -19,3 +19,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
           target: 'http://192.168.49.2:30961' # target: 'https://localhost:8080'
+          cmd_options: '-a'
