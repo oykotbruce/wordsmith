@@ -1,14 +1,15 @@
 name: trivy-repo-scan
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-  workflow_call:
+  #push:
+  #  branches:
+  #    - main
+  #pull_request:
+  #workflow_call:
+  workflow_dispatch: 
 jobs:
   tricy-repo-scan:
     name: trivy-repo-scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

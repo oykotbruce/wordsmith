@@ -61,54 +61,6 @@ jobs:
           sarif_file: 'trivy-repo-results.sarif'
 
 
-  trivy-ecr-scan:
-    name: Trivy ECR Scan
-    environment: tools
-    env:
-      IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
-      #TF_VERSION: 1.2.2
-      #TG_VERSION: 0.37.1
-      #TG_SRC_PATH: terraform
-      #TFC_WORKSPACE: dev
-    permissions:
-      id-token: write # This is required for requesting the JWT
-      actions: read   # This is required for actions/checkout
-      contents: read
-      security-events: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
-          aws-region: ca-central-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Get latest hash
-        id: get-latest-hash
-        uses: nmasur/latest-ecr-image-tag@v1
-        with: 
-          REPOSITORY_NAME: ssp
-      - run: echo "${{ steps.get-latest-hash.outputs.hash }}"
-
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          #image-ref: 'aws_account_id.dkr.ecr.region.amazonaws.com/imageName:${{ github.sha }}'
-          image-ref:  '${{secrets.AWS_ECR_URI}}:${{ steps.get-latest-hash.outputs.hash }}'
-          format: 'sarif'
-          output: 'trivy-ecr-results.sarif'
-      #  env:
-      #    AWS_ACCESS_KEY_ID: key_id
-      #    AWS_SECRET_ACCESS_KEY: access_key
-      #    AWS_DEFAULT_REGION: us-west-2
-
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
@@ -118,14 +70,10 @@ jobs:
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/owasp-scan.yaml@main
     with:
       ZAP_SCAN_TYPE: 'full' # Accepted values are base and full.
-      ZAP_TARGET_URL: https://dwv62mzgp1214.cloudfront.net/
+      ZAP_TARGET_URL: http://http://192.168.49.2:30961
       ZAP_DURATION: '2'
       ZAP_MAX_DURATION: '5'
       ZAP_GCP_PUBLISH: false
-      #ZAP_GCP_PROJECT: phronesis-310405  # Only required if ZAP_GCP_PUBLISH is TRUE
-      #ZAP_GCP_BUCKET: 'zap-scan-results' # Only required if ZAP_GCP_PUBLISH is TRUE
-    #secrets:
-    #  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} # Only required if ZAP_GCP_PUBLISH is TRUE
 
   checkov-scan: 
     runs-on: ubuntu-latest
@@ -156,56 +104,6 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'chekov-results.sarif'
-
-  ecr-scan:
-    runs-on: ubuntu-latest
-    name: ecr image scanning 
-    environment: tools
-    env:
-      IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
-      #TF_VERSION: 1.2.2
-      #TG_VERSION: 0.37.1
-      #TG_SRC_PATH: terraform
-      #TFC_WORKSPACE: dev
-    permissions:
-      id-token: write # This is required for requesting the JWT
-      actions: read   # This is required for actions/checkout
-      contents: read
-      security-events: write
-    
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
-          aws-region: ca-central-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Get latest hash
-        id: get-latest-hash
-        uses: nmasur/latest-ecr-image-tag@v1
-        with: 
-          REPOSITORY_NAME: ssp
-      - run: echo "${{ steps.get-latest-hash.outputs.hash }}"
-
-      - name: Scan Docker image
-        id: docker-scan
-        uses: alexjurkiewicz/ecr-scan-image@v1.7.1
-        with:
-          repository: ssp
-          tag: ${{ steps.get-latest-hash.outputs.hash }}
-          fail_threshold: medium
-          # ignore_list: |
-          #   CVE-2014-7654321
-          #   CVE-2014-456132
-        # Access scan results in later steps
-      - run: echo "${{ steps.docker-scan.outputs.total }} total vulnerabilities."
 
   rocketchat-workflow-failed-status: 
     name: Post workflow failed status to RC  
@@ -264,69 +162,3 @@ jobs:
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-##=====
-#  ecr_scan:
-#    name: ecr image scanning 
-#    environment: tools
-#    permissions:
-#      actions: read
-#      contents: read
-#      security-events: write
-#    runs-on: ubuntu-latest
-    # steps:
-    #   - name: Check out the repo
-    #     uses: actions/checkout@v2
-
-    #   - name: Configure AWS Credentials
-    #     uses: aws-actions/configure-aws-credentials@v1
-    #     with:
-    #       role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
-    #       aws-region: ca-central-1
-
-    #   - name: Login to Amazon ECR
-    #     id: login-ecr
-    #     uses: aws-actions/amazon-ecr-login@v1
-
-    #   - name: Get latest hash
-    #     id: get-latest-hash
-    #     uses: nmasur/latest-ecr-image-tag@v1
-    #     with: 
-    #       REPOSITORY_NAME: ssp
-    #   - run: echo "${{ steps.get-latest-hash.outputs.hash }}"
-
-    #   - name: Scan Docker image
-    #     id: docker-scan
-    #     uses: alexjurkiewicz/ecr-scan-image@v1.7.1
-    #     with:
-    #       repository: ssp
-    #       tag: ${{ steps.get-latest-hash.outputs.hash }}
-    #       # fail_threshold: medium
-    #       # ignore_list: |
-    #       #   CVE-2014-7654321
-    #       #   CVE-2014-456132
-    #   # Access scan results in later steps
-    #   - run: echo "${{ steps.docker-scan.outputs.total }} total vulnerabilities."
-
-#  slack-workflow-status:
-#    if: always()
-#    name: Post Workflow Status To Slack
-#    needs:
-#      - codeql-scan
-#      - build-push
-#      - trivy-image-scan
-#      - ecr_scan
-#      - checkov_scan
-##      - sonar-repo-scan
-##      - sonar-maven-scan
-#      - owasp-scan
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Slack Workflow Notification
-#        uses: Gamesight/slack-workflow-status@master
-#        with:
-#          # Required Input
-#          repo_token: ${{secrets.GITHUB_TOKEN}}
-#          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
-#          name: 'Github Workflows'
-#          icon_emoji: ':fire:'
-#          icon_url: 'https://img.icons8.com/material-outlined/96/000000/github.png'
