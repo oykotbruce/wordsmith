@@ -3,11 +3,12 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  #pull_request:
+  workflow_dispatch:
 jobs:
   build:
     name: trivy to scan iac 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       issues: write
 
