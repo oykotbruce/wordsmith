@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   #schedule:
   #  - cron:  '0 0 * * 0'
-
 jobs:
   codeql-scan:
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
@@ -73,7 +72,7 @@ jobs:
     #secrets:
     #  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} # Only required if ZAP_GCP_PUBLISH is TRUE
 
-  checkov-scan: 
+  checkov-scan:  
     runs-on: ubuntu-latest
     steps:
     - name: checkout
