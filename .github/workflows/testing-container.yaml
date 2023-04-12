@@ -60,20 +60,18 @@ jobs:
         with:
           sarif_file: 'trivy-repo-results.sarif'
 
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-ecr-results.sarif'
-
-  owasp-scan:
-    uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/owasp-scan.yaml@main
-    with:
-      ZAP_SCAN_TYPE: 'full' # Accepted values are base and full.
-      ZAP_TARGET_URL: http://http://192.168.49.2:30961
-      ZAP_DURATION: '2'
-      ZAP_MAX_DURATION: '5'
-      ZAP_GCP_PUBLISH: false
+#  owasp-scan:
+#    uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/owasp-scan.yaml@main
+#    with:
+#      ZAP_SCAN_TYPE: 'full' # Accepted values are base and full.
+#      ZAP_TARGET_URL: https://dwv62mzgp1214.cloudfront.net/
+#      ZAP_DURATION: '2'
+#      ZAP_MAX_DURATION: '5'
+#      ZAP_GCP_PUBLISH: false
+      #ZAP_GCP_PROJECT: phronesis-310405  # Only required if ZAP_GCP_PUBLISH is TRUE
+      #ZAP_GCP_BUCKET: 'zap-scan-results' # Only required if ZAP_GCP_PUBLISH is TRUE
+    #secrets:
+    #  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} # Only required if ZAP_GCP_PUBLISH is TRUE
 
   checkov-scan: 
     runs-on: ubuntu-latest
@@ -105,7 +103,7 @@ jobs:
       with:
         sarif_file: 'chekov-results.sarif'
 
-  rocketchat-workflow-failed-status: 
+   rocketchat-workflow-failed-status: 
     name: Post workflow failed status to RC  
     if: failure()
     runs-on: ubuntu-latest
@@ -161,4 +159,3 @@ jobs:
           url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
-
