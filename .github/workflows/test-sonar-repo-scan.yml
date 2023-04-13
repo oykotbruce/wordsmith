@@ -10,7 +10,7 @@ jobs:
 # Your Sonar Cloud Organization
 # for example, ORG: ci-testing, bruce-ci-testing, bcgov-sonarcloud
 #     ORG: <sonar_cloud_organization>
-      ORG: bcgov-sonarcloud
+      ORG: bruce-ci-testing
 # Your Project Key
 # for example, PROJECT_KEY: bcgov-pipeline-templates, maven-test-bruce
       PROJECT_KEY: maven-test
