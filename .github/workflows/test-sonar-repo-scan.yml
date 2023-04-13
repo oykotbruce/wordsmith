@@ -5,15 +5,15 @@ on:
   push:
 jobs:
   sonar-repo-scan:
-    uses: bruce-wh-li/devsecops-tools/.github/workflows/sonar-scanner.yaml@main
+    uses: oykotbruce/.github/workflows/sonar-scanner.yaml@main
     with:
 # Your Sonar Cloud Organization
 # for example, ORG: ci-testing, bruce-ci-testing, bcgov-sonarcloud
 #     ORG: <sonar_cloud_organization>
-      ORG: bruce-ci-testing
+      ORG: bcgov-sonarcloud
 # Your Project Key
 # for example, PROJECT_KEY: bcgov-pipeline-templates, maven-test-bruce
-      PROJECT_KEY: maven-test-bruce
+      PROJECT_KEY: maven-test
       URL: https://sonarcloud.io
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
