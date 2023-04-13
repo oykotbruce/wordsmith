@@ -13,7 +13,7 @@ jobs:
       ORG: bruce-ci-testing
 # Your Project Key
 # for example, PROJECT_KEY: bcgov-pipeline-templates, maven-test-bruce
-      PROJECT_KEY: maven-test
+      PROJECT_KEY: maven-test-bruce
       URL: https://sonarcloud.io
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
