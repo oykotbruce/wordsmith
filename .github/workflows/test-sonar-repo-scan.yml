@@ -1,0 +1,19 @@
+#workflow_name: test-sonar-repo-scan.yml
+name: sonar-repo-scan
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  sonar-repo-scan:
+    uses: bruce-wh-li/devsecops-tools/.github/workflows/sonar-scanner.yaml@main
+    with:
+# Your Sonar Cloud Organization
+# for example, ORG: ci-testing, bruce-ci-testing, bcgov-sonarcloud
+#     ORG: <sonar_cloud_organization>
+      ORG: bruce-ci-testing
+# Your Project Key
+# for example, PROJECT_KEY: bcgov-pipeline-templates, maven-test-bruce
+      PROJECT_KEY: maven-test-bruce
+      URL: https://sonarcloud.io
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
