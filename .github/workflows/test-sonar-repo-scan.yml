@@ -5,7 +5,7 @@ on:
   push:
 jobs:
   sonar-repo-scan:
-    uses: oykotbruce/.github/workflows/sonar-scanner.yaml@main
+    uses: oykotbruce/wordsmith/.github/workflows/sonar-scanner.yaml@main
     with:
 # Your Sonar Cloud Organization
 # for example, ORG: ci-testing, bruce-ci-testing, bcgov-sonarcloud
