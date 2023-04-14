@@ -10,10 +10,10 @@ jobs:
 # Your Sonar Cloud Organization
 # for example, ORG: ci-testing, bruce-ci-testing, bcgov-sonarcloud
 #     ORG: <sonar_cloud_organization>
-      ORG: bcgov-sonarcloud
+      ORG: bruce-ci-testing
 # Your Project Key
 # for example, PROJECT_KEY: bcgov-pipeline-templates, maven-test-bruce
-      PROJECT_KEY: bcgov_platform-services-registry
+      PROJECT_KEY: bruce-wh-li_github-slideshow
       URL: https://sonarcloud.io
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
