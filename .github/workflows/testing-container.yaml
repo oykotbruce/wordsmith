@@ -102,26 +102,26 @@ jobs:
       with:
         sarif_file: 'chekov-results.sarif'
 
-    rocketchat-workflow-failed-status: 
-       name: Post workflow failed status to RC  
-       if: failure()
-       runs-on: ubuntu-latest
-       needs:  
-         - owasp-scan 
-         - trivy-image-scan  
-         - checkov-scan  
-         - codeql-scan   
-         - trivy-iac-scan  
-         - trivy-repo-scan  
+  rocketchat-workflow-failed-status: 
+     name: Post workflow failed status to RC  
+     if: failure()
+     runs-on: ubuntu-latest
+      needs:  
+       - owasp-scan 
+       - trivy-image-scan  
+       - checkov-scan  
+       - codeql-scan   
+       - trivy-iac-scan  
+       - trivy-repo-scan  
       # - trivy-ecr-scan
       # - ecr-scan
-       steps:
-        - name: Rocket.Chat Notification
-          uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master       
+     steps:
+       - name: Rocket.Chat Notification
+         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master       
         # trivy-image-scan.failure() |checkov-scan.failure() |
         #      codeql-scan.failure() | trivy-iac-scan.failure() | trivy-repo-scan.failure() |
         #      trivy-ecr-scan.failure() | ecr-scan.failure()}}
-       with:
+         with:
           type: ${{ job.status }}
           job_name: '*more than 1 Application Security Check(s) Job Failed*'
           mention: 'here'
@@ -132,7 +132,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           exit_code: '1'
 
-    rocketchat-workflow-successful-status: 
+  rocketchat-workflow-successful-status: 
         name: Post workflow successful status to RC  
         needs :   
          - owasp-scan 
