@@ -5,9 +5,6 @@ on:
   #schedule:
   #  - cron:  '0 0 * * 0'
   
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 jobs:
   codeql-scan:
@@ -167,3 +164,7 @@ jobs:
           url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
