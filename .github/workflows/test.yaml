@@ -16,10 +16,10 @@ jobs:
       actions: read
       contents: read
       security-events: write    
-    uses: oykotbruce/wordsmith/.github/workflows/codeql.yaml@main
+    uses: .github/workflows/codeql.yaml@main
 
   trivy-image-scan:  #docker image scan
-    uses: oykotbruce/wordsmith/.github/workflows/trivy-container.yaml@main
+    uses: .github/workflows/trivy-container.yaml@main
     with:
       IMAGE: brucecruise/bcgov-nginx-demo
       TAG: latest
