@@ -6,6 +6,7 @@ on:
   #  - cron:  '0 0 * * 0'
 jobs:
   codeql-scan:
+    permissions: write-all
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
 
   trivy-image-scan:  #docker image scan
