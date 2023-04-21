@@ -1,15 +1,27 @@
 name: testing-container
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 on:
   workflow_dispatch:
   #schedule:
   #  - cron:  '0 0 * * 0'
+  
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 jobs:
   codeql-scan:
-    permissions: write-all
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
+
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
 
   trivy-image-scan:  #docker image scan
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/trivy-container.yaml@main
