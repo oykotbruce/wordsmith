@@ -23,8 +23,7 @@ jobs:
     with:
       IMAGE: brucecruise/bcgov-nginx-demo
       TAG: latest
-      exit-code: '0'
-     
+           
   trivy-iac-scan:
     name: Trivy IaC scan
     permissions: write-all
