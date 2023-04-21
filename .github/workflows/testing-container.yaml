@@ -17,6 +17,7 @@ jobs:
 
   trivy-iac-scan:
     name: Trivy IaC scan
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
