@@ -1,4 +1,4 @@
-name: testing-container
+name: my_security_gate
 
 on:
   workflow_dispatch:
