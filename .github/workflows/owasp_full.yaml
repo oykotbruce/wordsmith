@@ -23,4 +23,4 @@ jobs:
           #target: 'https://www.zaproxy.org/'
           target: 'http://192.168.49.2:30961'
           #rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
+          cmd_options: '-a -d -T 5 -m 2'
