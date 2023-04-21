@@ -1,21 +1,20 @@
-#workflow
 name: testing-container
+
 on:
   workflow_dispatch:
   #schedule:
   #  - cron:  '0 0 * * 0'
-
 jobs:
   codeql-scan:
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
 
-  trivy-image-scan:  #docker image scan
+trivy-image-scan:  #docker image scan
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/trivy-container.yaml@main
     with:
       IMAGE: brucecruise/bcgov-nginx-demo
       TAG: latest
 
-  trivy-iac-scan:
+trivy-iac-scan:
     name: Trivy IaC scan
     runs-on: ubuntu-latest
     steps:
