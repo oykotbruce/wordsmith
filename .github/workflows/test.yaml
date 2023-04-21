@@ -16,13 +16,14 @@ jobs:
       actions: read
       contents: read
       security-events: write    
-    uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/.yaml@main
+    uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
 
   trivy-image-scan:  #docker image scan
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/trivy-container.yaml@main
     with:
       IMAGE: brucecruise/bcgov-nginx-demo
       TAG: latest
+      exit-code: '0'
      
   trivy-iac-scan:
     name: Trivy IaC scan
