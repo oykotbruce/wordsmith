@@ -4,12 +4,12 @@ on:
 #    branches:
 #      - main
 #  pull_request:
-  workflow_call:
+#  workflow_call:
   workflow_dispatch:
 jobs:
   zap_base_scan:
     name : web application base_scan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions:
       actions: read
       contents: read
