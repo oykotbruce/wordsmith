@@ -19,6 +19,9 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   trivy-image-scan:  #docker image scan
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/trivy-container.yaml@main
@@ -164,7 +167,4 @@ jobs:
           url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
