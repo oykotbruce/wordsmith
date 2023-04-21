@@ -116,7 +116,8 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'chekov-results.sarif'
- 
+        
+  
   rocketchat-workflow-failed-status: 
     name: Post workflow failed status to RC  
     if: failure()
