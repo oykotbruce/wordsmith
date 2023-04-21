@@ -10,8 +10,9 @@ jobs:
   zap_base_scan:
     name : web application base_scan
     runs-on: ubuntu-latest
-    permissions: 
-      issues: write
+    permissions:
+      actions: read
+      contents: read
       security-events: write
     steps:
       - name: Checkout
@@ -24,4 +25,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
           target: 'http://192.168.49.2:30961' # target: 'https://localhost:8080'
+          #target: 'https://www.zaproxy.org/'
           cmd_options: '-a -d -T 5 -m 2'
