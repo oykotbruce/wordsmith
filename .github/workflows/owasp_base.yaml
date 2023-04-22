@@ -24,8 +24,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          #target: 'http://192.168.49.2:30961' 
+          target: 'http://192.168.49.2:30961' 
           #target: 'https://www.zaproxy.org/'
-          target: 'http://www.itsecgames.com'
+          #target: 'http://www.itsecgames.com'
           cmd_options: '-a -d -T 5 -m 2'
           issue_title: OWASP Baseline Wordsmith
