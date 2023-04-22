@@ -23,7 +23,7 @@ jobs:
       actions: read
       contents: read
       security-events: write    
-    uses: oykotbruce/worksmith/.github/workflows/sonar_scan.yaml@main
+    uses: oykotbruce/wordsmith/.github/workflows/sonar_scan.yaml@main
 
   #build-push-web:
   #  uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-web.yaml@main
