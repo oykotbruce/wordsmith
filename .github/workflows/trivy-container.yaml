@@ -8,6 +8,9 @@ on:
       IMAGE:
         required: true
         type: string
+      EXIT_CODE:
+        required: true
+        type: string
 jobs:
   trivy-image-scan:
     runs-on: ubuntu-latest
@@ -18,7 +21,7 @@ jobs:
       with:
         image-ref: ${{ inputs.IMAGE }}:${{ inputs.TAG }}
         format: table
-        exit-code: '0'
+        exit-code: ${ inputs.EXIT_CODE }}
         ignore-unfixed: true
         vuln-type: os,library
         severity: CRITICAL
