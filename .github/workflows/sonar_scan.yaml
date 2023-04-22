@@ -4,7 +4,7 @@ on:
   #  branches:
   #    - main
   workflow_dispatch:
-  workflow:call:
+  workflow_call:
   #pull_request:
   #  types: [opened, synchronize, reopened]
 jobs:
