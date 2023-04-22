@@ -19,25 +19,25 @@ jobs:
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
 
 
-  build-push-web:
-    uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-web.yaml@main
-    with:
-      IMAGE_REGISTRY: docker.io
-      IMAGE: dockersamples/wordsmith-web
-      WORKDIR: ./web
-    secrets:
-      IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
-      IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+  #build-push-web:
+  #  uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-web.yaml@main
+  #  with:
+  #    IMAGE_REGISTRY: docker.io
+  #    IMAGE: dockersamples/wordsmith-web
+  #    WORKDIR: ./web
+  #  secrets:
+  #    IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
+  #    IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
       
-  build-push-api:
-    uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-api.yaml@main
-    with:
-      IMAGE_REGISTRY: docker.io
-      IMAGE: dockersamples/wordsmith-api
-      WORKDIR: ./api
-    secrets:
-      IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
-      IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+  #build-push-api:
+  #  uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-api.yaml@main
+  #  with:
+  #    IMAGE_REGISTRY: docker.io
+  #    IMAGE: dockersamples/wordsmith-api
+  #    WORKDIR: ./api
+  #  secrets:
+  #    IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
+  #    IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
 
   trivy-image-scan:  #docker image scan
