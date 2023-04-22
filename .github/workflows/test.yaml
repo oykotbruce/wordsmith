@@ -24,6 +24,8 @@ jobs:
       contents: read
       security-events: write    
     uses: oykotbruce/wordsmith/.github/workflows/sonar_scan.yaml@main
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   #build-push-web:
   #  uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-web.yaml@main
