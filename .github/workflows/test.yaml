@@ -18,15 +18,18 @@ jobs:
       security-events: write    
     uses: bruce-wh-li/startup-sample-project-aws-containers/.github/workflows/codeql.yaml@main
 
-  sonar-scan:
+  sonar-repo-scan:
     permissions:
       actions: read
       contents: read
       security-events: write    
-    uses: oykotbruce/wordsmith/.github/workflows/sonar_scan.yaml@main
+    uses: oykotbruce/wordsmith/.github/workflows/sonar-scanner.yaml@main
+    with:
+      ORG: bli-sonar-org
+      PROJECT_KEY: security_day
+      URL: https://sonarcloud.io
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   #build-push-web:
   #  uses: oykotbruce/wordsmith/.github/workflows/call-docker-build-web.yaml@main
   #  with:
